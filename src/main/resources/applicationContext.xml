@@ -51,6 +51,11 @@
 	<bean id="redisHttpSessionConfiguration"
 		class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">
 		<property name="maxInactiveIntervalInSeconds" value="1800" />
-		<property name="cookieSerializer" ref="defaultCookieSerializer"/> 
+		<property name="cookieSerializer" ref="defaultCookieSerializer"/>
+		<!-- 
+			默认情况下，session 存储在 redis 的 key 是“spring:session::”，但如果有多个系统同时使用一个 redis，则会冲突，
+			此时应该配置 redisNamespace 值，配置后，其 key 为 spring:session:devlops:keyName 
+		-->
+		<property name="redisNamespace" value="ccq"/>
 	</bean>
 </beans>
